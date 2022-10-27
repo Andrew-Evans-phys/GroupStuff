@@ -1,26 +1,24 @@
 #group
 
-class group():
-    def __init__(self, name, func):
+from itertools import permutations
+
+
+class permutation():
+    def __init__(self, name, cycle):
         self.name = name
-        self.func = func
+        self.cycle = cycle
 
-    def _(self, a, b): #group operation
-        return self.func(a, b)
+    def permute(self, a):
+        a_loc = self.cycle.index(a)
+        return self.cycle[a_loc+1]
 
-    def _o(self, a, b):
-        print(f"{a}∘{b} = {self._(a,b)}")
+    def permute_o(self, a):
+        a_loc = self.cycle.index(a)
+        print(f"A({a}) = {self.cycle[(a_loc+1)%len(self.cycle)]}")
 
-    def print_name(self):
-        print(f"Name:{self.name}")
-
-
-def addition_mod_n(a, b, n=5):
-    return (a+b)%n
-
-Int_mod_n = group("Integers mod 5", addition_mod_n)
-Int_mod_n.print_name()
+    
 
 
-for i in range(5):
-    Int_mod_n._o(0, 4*i)
+test = permutation("test", [1,2,3])
+test.permutation(3)
+    
