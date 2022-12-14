@@ -1,7 +1,7 @@
 # Coding $S_{G}$
 Project aimed at coding basic group theory in python
 
---Curent development--
+#Curent development
 
 -writing introduction 
 
@@ -15,10 +15,8 @@ Project aimed at coding basic group theory in python
 
     -> use a O(n!) algorithm to check every permutation
     
--fix readme to have better spacing 
 
 -add asset folder and create repo art 
 
--merge to main branch
 
 
