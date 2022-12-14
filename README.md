@@ -1,7 +1,7 @@
 # Coding $S_{G}$
 Project aimed at coding basic group theory in python
 
-#Curent development
+# Curent development
 
 -writing introduction 
 
