@@ -19,4 +19,5 @@ Project aimed at coding basic group theory in python
 -add asset folder and create repo art 
 
 
-
+# Contact info
+email: evansa[at]sonoma.edu
