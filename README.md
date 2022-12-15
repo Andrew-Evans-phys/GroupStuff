@@ -7,7 +7,7 @@ Project aimed at coding basic group theory in python
 
 -add EDP
 
--add Cayley tables
+-change Cayley tables to use LaTeX
 
 -add basic theorems
 

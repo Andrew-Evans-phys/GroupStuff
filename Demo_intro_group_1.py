@@ -43,29 +43,25 @@ def lesson2(n = 10, x = 2, y = 4, g = 2) -> None:
     #x is the first input
     #y is the second input 
     #g is the generator of <g>
-    set_Z_n = [i for i in range(n)]
-    addition_mod_n = lambda a, b : (a + b)%n
-    Z_n = Group(set_Z_n, addition_mod_n)
+    Z_n = init_Z_n(n)
     print("Lesson 2\n")
     print(f"Z_{n} is the set {Z_n._set_to_set()} and the operation addition mod {n}\n")
     print(f"When we add {x} and {y} we find {Z_n._operation(x,y)}\n") #try playing with a and b!
     print(f"We can create a cyclic subgroup by adding an element ({g}) to itself over and over again.\n(This will be proved later as well as a proper definition of subgroup) \n")
-    gen_g = Cyclic_subgroup(set_Z_n, addition_mod_n, g)
+    gen_g = Cyclic_subgroup(Z_n._set, Z_n._operation, g)
     print(f"We find the set generated to be <{g}> = {gen_g._set_to_set()}\n")
 
 def lesson3(n = 20, x = 13, y = 3, g = 3) -> None:
     #n is the the value that the U(n) group is being created with 
     #x is the first input 
     #y is the second input
-    multiplication_mod_n = lambda a, b : (a * b)%n
-    set_U_n = [i for i in range(n) if(gcd(i,n) == 1)]
-    U_n = Group(set_U_n, multiplication_mod_n)
+    U_n = init_U_n(n)
     print("Lesson 3\n")
     print(f"We are not just limited to addition, consider U({n})\n")
     print(f"U({n})'s set is {U_n._set}\n(positive integers (i) less than {n} with gcd(i,{n})=1)\n")
     print(f"When we multiply {x} and {y} we find {U_n._operation(x,y)}\n")
     print(f"We can still create a cyclic subgroup by multiplying an element ({g}) to itself over and over again.\n")
-    gen_g = Cyclic_subgroup(set_U_n, multiplication_mod_n, g)
+    gen_g = Cyclic_subgroup(U_n._set, U_n._operation, g)
     print(f"We find the set generated to be <{g}> = {gen_g._set_to_set()}\n")
 
 goto = menu(lesson0, 3)
