@@ -3,10 +3,6 @@ Project aimed at coding basic group theory in python
 
 # Curent development
 
--writing introduction 
-
-    -> Generalize U_n so that operations take n as a parameter without breaking the Group class
-    
 -add basic theorems
 
 -add subgroup test (theorem)
