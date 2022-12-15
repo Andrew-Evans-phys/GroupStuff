@@ -3,6 +3,12 @@ Project aimed at coding basic group theory in python
 
 # Curent development
 
+-add D_n groups 
+
+-add EDP
+
+-add Cayley tables
+
 -add basic theorems
 
 -add subgroup test (theorem)
