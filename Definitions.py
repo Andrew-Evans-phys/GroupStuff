@@ -70,3 +70,8 @@ class Cyclic_subgroup(Group):
         self._set = _replace_set
 
 
+def gcd(a, b):
+    if(b == 0):
+        return abs(a)
+    else:
+        return gcd(b, a % b)
