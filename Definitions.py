@@ -87,37 +87,33 @@ class Cyclic_subgroup(Group):
             _replace_set.append(a_to_n)
         self._set = _replace_set
 
-class S_n:
-    def __init__(self, n):
-        self.n = n
-    
-    def compose(self, a,b) -> tuple: #comp restricted to S_n
-        a = list(a)
-        b = list(b)
-        product = []
-        for i in b:
-            product.append(a[i-1])
-        return tuple(product) 
+def create_element(perm, n) -> tuple: #for the init of S_n
+    element = []
+    for i in range(n):
+        element.append(perm[i])
+    return tuple(element)
 
-    def create_element(self,perm) -> tuple: #for the init of S_n
-        element = []
-        for i in range(self.n):
-            element.append(perm[i])
-        return tuple(element)
+def compose(a, b) -> tuple: #comp restricted to S_n
+    a = list(a)
+    b = list(b)
+    product = []
+    for i in b:
+        product.append(a[i-1])
+    return tuple(product) 
 
-    def init_S_n(self) -> Group:
-        perm_list = list(itertools.permutations(range(1, self.n+1)))
-        elements = []
-        for perm in perm_list:
-            elements.append(self.create_element(perm))
-        return Group(elements, self.compose)
+def init_S_(n) -> Group:
+    perm_list = list(itertools.permutations(range(1, n+1)))
+    elements = []
+    for perm in perm_list:
+        elements.append(create_element(perm, n))
+    return Group(elements, compose)
 
-def init_Z_n(n):
+def init_Z_n(n) -> Group:
     set_Z_n = [i for i in range(n)]
     addition_mod_n = lambda a, b : (a + b)%n
     return Group(set_Z_n, addition_mod_n)
 
-def init_U_n(n):
+def init_U_n(n) -> Group:
     multiplication_mod_n = lambda a, b : (a * b)%n
     set_U_n = [i for i in range(n) if(gcd(i,n) == 1)]
     return Group(set_U_n, multiplication_mod_n)
