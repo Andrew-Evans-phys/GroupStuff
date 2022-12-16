@@ -43,7 +43,7 @@ def lesson2(n = 10, x = 2, y = 4, g = 2) -> None:
     #x is the first input
     #y is the second input 
     #g is the generator of <g>
-    Z_n = init_Z_n(n)
+    Z_n = init_Z_(n)
     print("Lesson 2\n")
     print(f"Z_{n} is the set {Z_n._set_to_set()} and the operation addition mod {n}\n")
     print(f"When we add {x} and {y} we find {Z_n._operation(x,y)}\n") #try playing with a and b!
@@ -55,7 +55,7 @@ def lesson3(n = 20, x = 13, y = 3, g = 3) -> None:
     #n is the the value that the U(n) group is being created with 
     #x is the first input 
     #y is the second input
-    U_n = init_U_n(n)
+    U_n = init_U_(n)
     print("Lesson 3\n")
     print(f"We are not just limited to addition, consider U({n})\n")
     print(f"U({n})'s set is {U_n._set}\n(positive integers (i) less than {n} with gcd(i,{n})=1)\n")

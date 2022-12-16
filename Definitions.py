@@ -108,12 +108,12 @@ def init_S_(n) -> Group:
         elements.append(create_element(perm, n))
     return Group(elements, compose)
 
-def init_Z_n(n) -> Group:
+def init_Z_(n) -> Group:
     set_Z_n = [i for i in range(n)]
     addition_mod_n = lambda a, b : (a + b)%n
     return Group(set_Z_n, addition_mod_n)
 
-def init_U_n(n) -> Group:
+def init_U_(n) -> Group:
     multiplication_mod_n = lambda a, b : (a * b)%n
     set_U_n = [i for i in range(n) if(gcd(i,n) == 1)]
     return Group(set_U_n, multiplication_mod_n)
