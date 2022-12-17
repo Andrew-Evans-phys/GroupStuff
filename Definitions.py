@@ -101,12 +101,23 @@ def compose(a, b) -> tuple: #comp restricted to S_n
         product.append(a[i-1])
     return tuple(product) 
 
-def init_S_(n) -> Group:
-    perm_list = list(itertools.permutations(range(1, n+1)))
-    elements = []
-    for perm in perm_list:
-        elements.append(create_element(perm, n))
-    return Group(elements, compose)
+def D_4_compose(a, b) -> str: #comp restricted to S_n
+    D_4_set = {
+        "R0" : (1,2,3,4),
+        "R90" : (4, 1, 2, 3),
+        "R180" : (3, 4, 1, 2), 
+        "R270" : (2, 3, 4, 1), 
+        "V" : (2, 1, 4, 3), 
+        "H" : (4, 3, 2, 1), 
+        "D" : (1, 4, 3, 2), 
+        "Dp" : (3, 2, 1, 4)}
+    a = list(D_4_set[a])
+    b = list(D_4_set[b])
+    product = []
+    for i in b:
+        product.append(a[i-1])
+    inv_D_4_map = {v: k for k, v in D_4_set.items()}
+    return inv_D_4_map[tuple(product)]
 
 def init_Z_(n) -> Group:
     set_Z_n = [i for i in range(n)]
@@ -117,6 +128,17 @@ def init_U_(n) -> Group:
     multiplication_mod_n = lambda a, b : (a * b)%n
     set_U_n = [i for i in range(n) if(gcd(i,n) == 1)]
     return Group(set_U_n, multiplication_mod_n)
+
+def init_S_(n) -> Group:
+    perm_list = list(itertools.permutations(range(1, n+1)))
+    elements = []
+    for perm in perm_list:
+        elements.append(create_element(perm, n))
+    return Group(elements, compose)
+
+def init_D_4() -> Group:
+    D_4_set = ["R0", "R90", "R180", "R270", "V", "H", "D", "Dp"]
+    return Group(D_4_set, D_4_compose)
 
 def gcd(a, b):
     if(b == 0):
