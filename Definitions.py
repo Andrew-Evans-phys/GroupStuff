@@ -18,12 +18,14 @@ class Group:
             raise FailsIdentity
 
         inverses = [] #stored as a list of set of pairs of x and x_inv
+        inverses_dict = {}
         for x in _set:
             x_inv_found = False
             for x_inv in _set:
                 inv_pair = {x, x_inv}
                 if(identity == _operation_var(x_inv, x) and identity == _operation_var(x, x_inv)):
                     inverses_contained = bool(inverses.count(inv_pair))
+                    inverses_dict.update({x:x_inv})
                     if(inverses_contained):
                         x_inv_found = True
                         pass
@@ -51,6 +53,7 @@ class Group:
         #Assuming all the above conditions were met you now have a brand new group!
         self._set = _set
         self._operation_var = _operation_var
+        self.inverses_dict = inverses_dict        
         self.order = len(_set)
         self.identity = identity
         self.cayley_data = cayley_table
@@ -63,6 +66,19 @@ class Group:
 
     def _set_to_set(self):
         return set(self._set)
+
+    def inverse(self, a):
+        if(a not in self._set_to_set()):
+            raise NotAnElement
+        return self.inverses_dict.get(a)
+
+    def e_order(self, a):
+        n = 1
+        a_n = a
+        while(a_n != self.identity):
+            a_n = self._operation(a_n, a)
+            n += 1
+        return n
 
     def display_cayley_table(self) -> None:
         output = "|x|"
