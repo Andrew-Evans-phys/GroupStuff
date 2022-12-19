@@ -12,10 +12,6 @@ Project aimed at coding basic group theory in python
 -add basic theorems
 
 -add subgroup test (theorem)
-
--creating explict permutation groups from entered set and operation (might need to put some checks that the group axioms are met)
-
-    -> use a O(n!) algorithm to check every permutation
     
 
 -add asset folder and create repo art 
