@@ -14,7 +14,7 @@ Project aimed at coding finite group theory in python
 
 - Group definition checker for finite groups
 
-- Basic groups prepackaged ($S_n, Z_n, D_n, U_n$)
+- Basic groups prepackaged (S_n, Z_n, D_n, U_n)
 
 - External direct product 
 
