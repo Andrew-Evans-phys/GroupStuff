@@ -48,7 +48,7 @@ def lesson2(n = 10, x = 2, y = 4, g = 2) -> None:
     print(f"Z_{n} is the set {Z_n._set_to_set()} and the operation addition mod {n}\n")
     print(f"When we add {x} and {y} we find {Z_n._operation(x,y)}\n") #try playing with a and b!
     print(f"We can create a cyclic subgroup by adding an element ({g}) to itself over and over again.\n(This will be proved later as well as a proper definition of subgroup) \n")
-    gen_g = Cyclic_subgroup(Z_n._set, Z_n._operation, g)
+    gen_g = init_cylic(Z_n, g)
     print(f"We find the set generated to be <{g}> = {gen_g._set_to_set()}\n")
 
 def lesson3(n = 20, x = 13, y = 3, g = 3) -> None:
@@ -61,7 +61,7 @@ def lesson3(n = 20, x = 13, y = 3, g = 3) -> None:
     print(f"U({n})'s set is {U_n._set}\n(positive integers (i) less than {n} with gcd(i,{n})=1)\n")
     print(f"When we multiply {x} and {y} we find {U_n._operation(x,y)}\n")
     print(f"We can still create a cyclic subgroup by multiplying an element ({g}) to itself over and over again.\n")
-    gen_g = Cyclic_subgroup(U_n._set, U_n._operation, g)
+    gen_g = init_cylic(U_n, g)
     print(f"We find the set generated to be <{g}> = {gen_g._set_to_set()}\n")
 
 goto = menu(lesson0, 3)
