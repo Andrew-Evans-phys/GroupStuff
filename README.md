@@ -1,13 +1,22 @@
 # Coding $S_{G}$
 Project aimed at coding finite group theory in python
 
-# Curent development
+# Coming soon
+- Cosets 
 
-- add basic theorems
+- Basic theorems
 
-- add subgroup test (theorem)
+- Subgroup test (theorem)
 
-- add asset folder and create repo art 
+- Asset folder and repo art :)
+
+# Features
+
+- Group definition checker for finite groups
+
+- Basic groups prepackaged ($S_n, Z_n, D_n, U_n$)
+
+- External direct product 
 
 
 # Contact info
