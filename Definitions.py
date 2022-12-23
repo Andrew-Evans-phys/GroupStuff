@@ -117,23 +117,51 @@ def compose(a, b) -> tuple: #comp restricted to S_n
         product.append(a[i-1])
     return tuple(product) 
 
-def D_4_compose(a, b) -> str: #comp restricted to S_n
-    D_4_set = {
-        "R0" : (1,2,3,4),
-        "R90" : (4, 1, 2, 3),
-        "R180" : (3, 4, 1, 2), 
-        "R270" : (2, 3, 4, 1), 
-        "V" : (2, 1, 4, 3), 
-        "H" : (4, 3, 2, 1), 
-        "D" : (1, 4, 3, 2), 
-        "Dp" : (3, 2, 1, 4)}
-    a = list(D_4_set[a])
-    b = list(D_4_set[b])
-    product = []
-    for i in b:
-        product.append(a[i-1])
-    inv_D_4_map = {v: k for k, v in D_4_set.items()}
-    return inv_D_4_map[tuple(product)]
+def init_D_(n) -> Group:
+    elements = []
+    for i in range(n):
+        elements.append(f"R{i}")
+    for i in range(n):
+        elements.append(f"F{i+1}")
+
+    def D_n_compose(a, b) -> str:
+        R0 = [i for i in range(1,n+1)]
+        rotations = [tuple(R0)]
+        for k in range(n-1):
+            new_R = []
+            for j in R0:
+                new_R.append(((j+k)%n)+1)
+            rotations.append(tuple(new_R))
+
+        #converting to dict 
+        rotations_dict = {}
+        for i in range(n):
+            rotations_dict.update({f"R{i}" : rotations[i]})
+
+        #making flips
+        F1 = tuple(reversed(R0))
+        flips = []
+        for i in rotations:
+            flips.append(compose(i, F1))
+
+        #converting to dict
+        flips_dict = {}
+        for i in range(n):
+            flips_dict.update({f"F{i+1}" : flips[i]})
+
+        #merging flips and rotations into one dict
+        elements = rotations_dict
+        elements.update(flips_dict)
+
+        a = list(elements[a])
+        b = list(elements[b])
+        product = []
+        for i in b:
+            product.append(a[i-1])
+        inv_D_n_map = {v: k for k, v in elements.items()}
+        return inv_D_n_map[tuple(product)]
+        
+    return Group(elements, D_n_compose)
 
 def init_Z_(n) -> Group:
     set_Z_n = [i for i in range(n)]
@@ -151,10 +179,6 @@ def init_S_(n) -> Group:
     for perm in perm_list:
         elements.append(create_element(perm, n))
     return Group(elements, compose)
-
-def init_D_4() -> Group:
-    D_4_set = ["R0", "R90", "R180", "R270", "V", "H", "D", "Dp"]
-    return Group(D_4_set, D_4_compose)
 
 def gcd(a, b):
     if(b == 0):
