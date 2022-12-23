@@ -81,7 +81,7 @@ class Group:
         return n
 
     def display_cayley_table(self) -> None:
-        output = "|x|"
+        output = "|x |"
         for i in self._set:
             output += f"{i}|"
         output += "\n"
@@ -104,25 +104,19 @@ class Cyclic_subgroup(Group):
         self._set = _replace_set
 
 def create_element(perm, n) -> tuple: #for the init of S_n
-    element = []
-    for i in range(n):
-        element.append(perm[i])
+    element = [perm[i] for i in range(n)]
     return tuple(element)
 
 def compose(a, b) -> tuple: #comp restricted to S_n
     a = list(a)
     b = list(b)
-    product = []
-    for i in b:
-        product.append(a[i-1])
+    product = [a[i-1] for i in b]
     return tuple(product) 
 
 def init_D_(n) -> Group:
-    elements = []
-    for i in range(n):
-        elements.append(f"R{i}")
-    for i in range(n):
-        elements.append(f"F{i+1}")
+    r = [f"R{i}" for i in range(n)]
+    f = [f"F{i+1}" for i in range(n)]
+    elements = r+f
 
     def D_n_compose(a, b) -> str:
         R0 = [i for i in range(1,n+1)]
@@ -134,20 +128,14 @@ def init_D_(n) -> Group:
             rotations.append(tuple(new_R))
 
         #converting to dict 
-        rotations_dict = {}
-        for i in range(n):
-            rotations_dict.update({f"R{i}" : rotations[i]})
+        rotations_dict = {f"R{i}" : rotations[i] for i in range(n)}
 
         #making flips
         F1 = tuple(reversed(R0))
-        flips = []
-        for i in rotations:
-            flips.append(compose(i, F1))
+        flips = [compose(i, F1) for i in rotations]
 
         #converting to dict
-        flips_dict = {}
-        for i in range(n):
-            flips_dict.update({f"F{i+1}" : flips[i]})
+        flips_dict = {f"F{i+1}" : flips[i] for i in range(n)}
 
         #merging flips and rotations into one dict
         elements = rotations_dict
@@ -155,12 +143,10 @@ def init_D_(n) -> Group:
 
         a = list(elements[a])
         b = list(elements[b])
-        product = []
-        for i in b:
-            product.append(a[i-1])
-        inv_D_n_map = {v: k for k, v in elements.items()}
+        product = [a[i-1] for i in b]
+        inv_D_n_map = {v : k for k, v in elements.items()}
         return inv_D_n_map[tuple(product)]
-        
+
     return Group(elements, D_n_compose)
 
 def init_Z_(n) -> Group:
@@ -175,9 +161,7 @@ def init_U_(n) -> Group:
 
 def init_S_(n) -> Group:
     perm_list = list(itertools.permutations(range(1, n+1)))
-    elements = []
-    for perm in perm_list:
-        elements.append(create_element(perm, n))
+    elements = [create_element(perm, n) for perm in perm_list]
     return Group(elements, compose)
 
 def gcd(a, b):
