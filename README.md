@@ -2,21 +2,11 @@
 Project aimed at coding basic group theory in python
 
 # Curent development
+- add EDP
 
--add D_n groups 
+- add basic theorems
 
--add EDP
-
--change Cayley tables to use LaTeX
-
--add basic theorems
-
--add subgroup test (theorem)
-
--creating explict permutation groups from entered set and operation (might need to put some checks that the group axioms are met)
-
-    -> use a O(n!) algorithm to check every permutation
-    
+-add subgroup test (theorem) 
 
 -add asset folder and create repo art 
 
