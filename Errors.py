@@ -2,9 +2,9 @@
 
 #Errors
 class FailsIdentity(Exception):
-    "Raised when the group does not contain ε"
+    "Raised when the group does not contain e"
     
-    def __init__(self, message="Group does not contain ε"):
+    def __init__(self, message="Group does not contain e"):
         self.message = message
         super().__init__(self.message)
 
@@ -40,5 +40,12 @@ class EndLesson(Exception):
     "Raised when the user does not hit c to continue"
 
     def __init__(self, message="Lesson aborted"):
+        self.message = message
+        super().__init__(self.message)
+
+class IncorrectInputLength(Exception):
+    "Raised when an element in the EDP product has the incorrect length"
+    
+    def __init__(self, message="Element in the EDP product has the incorrect length"):
         self.message = message
         super().__init__(self.message)

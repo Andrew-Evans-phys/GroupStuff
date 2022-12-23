@@ -119,9 +119,23 @@ class Group:
         output += "\end{tabular}\n\\end{center}"
         print(output)
 
+def EDP(group_list) -> Group:
+    _sets_list = [i._set for i in group_list]
+    _operation_list = [i._operation_var for i in group_list]
+    elements = list(itertools.product(*_sets_list)) #all combinations of elements in tuple form
+
+    def operation(a,b):
+        a = list(a)
+        b = list(b)
+        if(len(a) == len(_sets_list) and len(b) == len(_sets_list)):
+            return tuple([_operation_list[i](a[i],b[i]) for i in range(len(_sets_list))])
+        else:
+            raise IncorrectInputLength
+
+    return Group(elements, operation)
+
 def init_cylic(group, a) -> Group:
     new_set = group.powers_of_(a)
-    print(new_set)
     return Group(new_set, group._operation_var)
 
 def create_element(perm, n) -> tuple: #for the init of S_n
