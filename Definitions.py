@@ -7,7 +7,7 @@ import itertools
 class Group:
     def __init__(self, _set, _operation_var) -> None:
         #identity test x = x^2 => x = e
-        is_identity = [e_test == _operation_var(e_test, e_test) for e_test in _set] #list of booleans checking for if the identity has been found
+        is_identity = [element == _operation_var(element, element) for element in _set] #list of booleans checking for if the identity has been found
         identity_found = any(is_identity) #boolean that is true if there exists an identity
         if(identity_found): 
             identity = _set[is_identity.index(True)]
