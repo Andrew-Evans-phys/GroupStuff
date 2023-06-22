@@ -6,15 +6,12 @@ import itertools
 #Group definition
 class Group:
     def __init__(self, _set, _operation_var) -> None:
-        identity = None
-        identity_found = False
-        for e_test in _set: #what happens if this ends and finds no identity? -> Error
-            if(e_test == _operation_var(e_test, e_test)): #identity test x = x^2 => x = e
-                identity_found = True
-                identity = e_test
-                break
-
-        if(identity_found == False):
+        #identity test x = x^2 => x = e
+        is_identity = [e_test == _operation_var(e_test, e_test) for e_test in _set] #list of booleans checking for if the identity has been found
+        identity_found = any(is_identity) #boolean that is true if there exists an identity
+        if(identity_found): 
+            identity = _set[is_identity.index(True)]
+        else:
             raise FailsIdentity
 
         inverses = [] #stored as a list of set of pairs of x and x_inv
