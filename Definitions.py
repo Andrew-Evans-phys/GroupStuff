@@ -70,8 +70,7 @@ class Group:
         return self.inverses_dict.get(a)
 
     def e_order(self, a) -> int:
-        n = 1
-        a_n = a
+        n, a_n = 1, a
         while(a_n != self.identity):
             n += 1
             a_n = self.power(a, n)
@@ -117,8 +116,8 @@ class Group:
         print(output)
 
 def EDP(group_list) -> Group:
-    _sets_list = [i._set for i in group_list]
-    _operation_list = [i._operation_var for i in group_list]
+    set_op_list = [(group._set, group._operation_var) for group in group_list]
+    _sets_list, _operation_list = zip(*set_op_list)
     elements = list(itertools.product(*_sets_list)) #all combinations of elements in tuple form
 
     def operation(a,b):
