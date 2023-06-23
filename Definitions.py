@@ -6,8 +6,8 @@ import itertools
 #Group definition
 class Group:
     def __init__(self, _set, _operation_var) -> None:
-        #identity test x = x^2 => x = e
-        is_identity = [element == _operation_var(element, element) for element in _set] #list of booleans checking for if the identity has been found
+        identity_test = lambda x, f: x == f(x,x) #x = x^2 => x = e
+        is_identity = [identity_test(element, _operation_var) for element in _set] #list of booleans checking for if the identity has been found
         identity_found = any(is_identity) #boolean that is true if there exists an identity
         if(identity_found): 
             identity = _set[is_identity.index(True)]
@@ -21,7 +21,7 @@ class Group:
             for x_inv in _set:
                 inv_pair = {x, x_inv}
                 if(identity == _operation_var(x_inv, x) and identity == _operation_var(x, x_inv)):
-                    inverses_contained = bool(inverses.count(inv_pair))
+                    inverses_contained = inverses.count(inv_pair) != 0
                     inverses_dict.update({x:x_inv})
                     if(inverses_contained):
                         x_inv_found = True
