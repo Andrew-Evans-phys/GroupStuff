@@ -25,12 +25,10 @@ class Group:
                     inverses_dict.update({x:x_inv})
                     if(inverses_contained):
                         x_inv_found = True
-                        pass
                     else:
                         inverses.append(inv_pair)
                         x_inv_found = True
-
-            if(x_inv_found == False):
+            if(not x_inv_found):
                 raise FailsInverse
 
         set_form = set(_set)
@@ -42,9 +40,11 @@ class Group:
                 row.append(ab)
                 if(ab not in set_form):
                     raise FailsClosure
-                for c in _set:
-                    if(not(_operation_var(ab,c) == _operation_var(a,_operation_var(b,c)))):
-                        raise FailsAssociativity
+                #defining boolean lambda function for associativity test
+                assoc = lambda a, b, ab, c, f: f(ab,c) == f(a,f(b,c))
+                is_associative = [assoc(a,b,ab,c, _operation_var) for c in _set]
+                if not all(is_associative):
+                    FailsAssociativity
             cayley_table.append(row)
 
         #Assuming all the above conditions were met you now have a brand new group!
