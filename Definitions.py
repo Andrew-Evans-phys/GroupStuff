@@ -70,6 +70,15 @@ class Group:
         return self.inverses_dict.get(a)
 
     def e_order(self, a) -> int:
+        """Method of the class "Group" that returns the order of an element.
+
+        Args:
+            a (Group Element): Element of the group the method is acting on.
+
+        Returns:
+            int: Order of the element.
+        """
+        #need to implement type protection
         n, a_n = 1, a
         while(a_n != self.identity):
             n += 1
