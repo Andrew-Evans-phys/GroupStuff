@@ -73,10 +73,10 @@ class Group:
         """Method of the class "Group" that returns the order of an element.
 
         Args:
-            a (Group Element): element of the group the method is acting on.
+            a (Group Element): Element of the group the method is acting on.
 
         Returns:
-            int: order of the element.
+            int: Order of the element.
         """
         #need to implement type protection
         n, a_n = 1, a
