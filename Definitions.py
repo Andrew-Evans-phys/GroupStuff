@@ -86,6 +86,15 @@ class Group:
         return n
 
     def power(self, a, pow):
+        """Method of the class "Group" that results in repeating the operation (a * a) a total of n times. Represented and spoken as powers/exonents. 
+
+        Args:
+            a (Group Element): Element of the group that method is acting on.
+            pow (User-generated Integer): Exponent. Number of times (a * a) will be done.
+
+        Returns:
+            variable type of set: Group element mapped to after taking (a * a) n times.
+        """
         if(pow == 0):
             return self.identity
         elif(pow == 1):
