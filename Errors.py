@@ -25,7 +25,7 @@ class FailsAssociativity(Exception):
 class FailsClosure(Exception):
     "Raised when the group is not closed under operation"
 
-    def __init__(self, message="Group is not close"):
+    def __init__(self, message="Group is not closed"):
         self.message = message
         super().__init__(self.message)
 
