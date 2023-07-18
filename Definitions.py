@@ -56,22 +56,19 @@ class Group:
         self.cayley_data = cayley_table
 
     def _operation(self, a, b): #type should be looked into, varible function return?
-        """Method of the class "Group" that takes in two inputs and checks if they are elements of the group, that is before 
-        giving the result of taking the binary operation between them.
-        Also, checks to make sure data type of inputs are the same as those in desired set.
+        """Method of the class Group that takes in two inputs and performs the group operation (in order of inputs).
+        Checks to make sure data type of inputs are the same as elements in Group before execution.
 
 
         Args:
-            a (User-Generated Input): Supposed element of group.
-            b (User-Generated Input): Supposed element of group.
+            a (Group Element): Arbitrary element of Group.
+            b (Group Element): Arbitrary element of Group.
 
         Raises:
-            NotAnElement: Error when an input is not an element of the group being considered and prevents
-            this method "operation" from being performed: 
-            "Raised when element input is not in group."
-
+            NotAnElement: Raised when a or b is not an element of the Group.  
+            
         Returns:
-            _type_ from Group: Value of (a * b), of which would be found inside the group if closed under operation.
+            Group Element: Value of (a * b).
         """
         set_form = self._set_to_set()
         if(a not in set_form or b not in set_form):
@@ -79,8 +76,7 @@ class Group:
         return self._operation_var(a, b)
 
     def _set_to_set(self):
-        """Method of the class "Group" that creates a mathematically defined set from the list of elements given by the user;
-        what will be treates as the actual group.
+        """Method of the class Group that takes a list of Group elements and converts into a set of Group elements.
 
         Returns:
             set: A set containing the elements of the group.
@@ -88,17 +84,17 @@ class Group:
         return set(self._set)
 
     def inverse(self, a):
-        """Method of the class "Group" that validates a single input as an element of the group before finding
+        """Method of the class Group that validates a single input as an element of the group before finding
         its corresponding inverse.
 
         Args:
-            a (_type_): _description_
+            a (Group Elememt): Arbitrary element of the Group.
 
         Raises:
-            NotAnElement: _description_
+            NotAnElement: Raised when a is not an element of the Group.
 
         Returns:
-            _type_: _description_
+            Group Element: Inverse element of a, a^(-1), defined by: a * a^(-1) = a^(-1) * a = e
         """
         if(a not in self._set_to_set()):
             raise NotAnElement
@@ -121,14 +117,13 @@ class Group:
         return n
 
     def power(self, a, pow):
-        """Method of the class "Group" that results in repeating the operation (a * a) a total of n times. Represented and spoken as powers/exonents. 
-
+        """Method of the class "Group" that results in multiplying a by itself n times, a * a * ... * a = a^n.
         Args:
             a (Group Element): Element of the group that method is acting on.
-            pow (User-generated Integer): Exponent. Number of times (a * a) will be done.
+            pow (int): Exponent. Number of times a will be multiplyed by itself.
 
         Returns:
-            variable type of set: Group element mapped to after taking (a * a) n times.
+            Group Element: Group element mapped to after taking a^n.
         """
         if(pow == 0):
             return self.identity
