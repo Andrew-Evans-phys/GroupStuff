@@ -56,15 +56,50 @@ class Group:
         self.cayley_data = cayley_table
 
     def _operation(self, a, b): #type should be looked into, varible function return?
+        """Method of the class "Group" that takes in two inputs and checks if they are elements of the group, that is before 
+        giving the result of taking the binary operation between them.
+        Also, checks to make sure data type of inputs are the same as those in desired set.
+
+
+        Args:
+            a (User-Generated Input): Supposed element of group.
+            b (User-Generated Input): Supposed element of group.
+
+        Raises:
+            NotAnElement: Error when an input is not an element of the group being considered and prevents
+            this method "operation" from being performed: 
+            "Raised when element input is not in group."
+
+        Returns:
+            _type_ from Group: Value of (a * b), of which would be found inside the group if closed under operation.
+        """
         set_form = self._set_to_set()
         if(a not in set_form or b not in set_form):
             raise NotAnElement
         return self._operation_var(a, b)
 
     def _set_to_set(self):
+        """Method of the class "Group" that creates a mathematically defined set from the list of elements given by the user;
+        what will be treates as the actual group.
+
+        Returns:
+            set: A set containing the elements of the group.
+        """
         return set(self._set)
 
     def inverse(self, a):
+        """Method of the class "Group" that validates a single input as an element of the group before finding
+        its corresponding inverse.
+
+        Args:
+            a (_type_): _description_
+
+        Raises:
+            NotAnElement: _description_
+
+        Returns:
+            _type_: _description_
+        """
         if(a not in self._set_to_set()):
             raise NotAnElement
         return self.inverses_dict.get(a)
