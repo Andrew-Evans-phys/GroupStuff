@@ -101,7 +101,7 @@ class Group:
         return self.inverses_dict.get(a)
 
     def e_order(self, a) -> int:
-        """Method of the class "Group" that returns the order of an element.
+        """Method of the class Group that returns the order of an element.
 
         Args:
             a (Group Element): Element of the group the method is acting on.
@@ -117,7 +117,7 @@ class Group:
         return n
 
     def power(self, a, pow):
-        """Method of the class "Group" that results in multiplying a by itself n times, a * a * ... * a = a^n.
+        """Method of the class Group that results in multiplying a by itself n times, a * a * ... * a = a^n.
         Args:
             a (Group Element): Element of the group that method is acting on.
             pow (int): Exponent. Number of times a will be multiplyed by itself.
@@ -132,10 +132,21 @@ class Group:
         else:
             return self._operation(a, self.power(a, pow-1))
 
-    def powers_of_(self, a):
+    def powers_of_(self, a): #To include the interger value of the order n, shouldnt range have a +1 to the self.e_order(a)?
+        """Method of the class Group that returns a list of powers from a^0 to a^n, providing elements of smallest subgroup of element a.
+
+        Args:
+            a (Group Element): Element of the Group that method is acting on.
+
+        Returns:
+            list:  A list of Group elements whose placement correspond to taking powers of Group element a.
+        """
         return [self.power(a, i) for i in range(self.e_order(a))]
 
     def display_cayley_table(self) -> None:
+        """Method of the class Group that displays the Cayley Table of the Group in Python terminal; a table whose interior elements 
+        correspond to taking operation between two Group elements as follows:  (row Group element) * (column Group element).
+        """
         output = "|x |"
         for i in self._set:
             output += f"{i}|"
@@ -148,6 +159,10 @@ class Group:
         print(output)
 
     def latex_cayley_table(self) -> None:
+        """Method of the class Group that displays copy and paste LaTeX code for the Cayley Table of the Group; a table whose 
+        interior elements correspond to taking operation between two Group elements as follows:  
+        (row Group element) * (column Group element).
+        """
         centers = ""
         for i in range(self.order):
             centers += " c"
