@@ -139,7 +139,7 @@ class Group:
             a (Group Element): Element of the Group that method is acting on.
 
         Returns:
-            list:  A list of Group elements whose placement correspond to taking powers of Group element a.
+            list (Group Element):  A list of Group elements whose placement correspond to taking powers of Group element a.
         """
         return [self.power(a, i) for i in range(self.e_order(a))]
 
@@ -159,7 +159,7 @@ class Group:
         print(output)
 
     def latex_cayley_table(self) -> None:
-        """Method of the class Group that displays copy and paste LaTeX code for the Cayley Table of the Group; a table whose 
+        """Method of the class Group that displays LaTeX code for the Cayley Table of the Group; a table whose 
         interior elements correspond to taking operation between two Group elements as follows:  
         (row Group element) * (column Group element).
         """
@@ -244,6 +244,15 @@ def init_D_(n) -> Group:
     return Group(elements, D_n_compose)
 
 def init_Z_(n) -> Group:
+    """Method of the class Group that takes in any positive integer n and returns the Group "Z modulo n", that is 
+    the set {0, 1,..., n-1}, with the operation between any two elements of the set to be addition modulo n.
+
+    Args:
+        n (Positive Integer): Arbitrary positive integer that Method is acting on.
+
+    Returns:
+        Group: A set with a binary operation that is closed, associative, contains identity, and all element inverses.
+    """
     set_Z_n = [i for i in range(n)]
     addition_mod_n = lambda a, b : (a + b)%n
     return Group(set_Z_n, addition_mod_n)
