@@ -244,14 +244,14 @@ def init_D_(n) -> Group:
     return Group(elements, D_n_compose)
 
 def init_Z_(n) -> Group:
-    """Method of the class Group that takes in any positive integer n and returns the Group "Z modulo n", that is 
+    """Function that takes in any positive integer n and returns the Group "Z modulo n." That is, 
     the set {0, 1,..., n-1}, with the operation between any two elements of the set to be addition modulo n.
 
     Args:
         n (Positive Integer): Arbitrary positive integer that Method is acting on.
 
     Returns:
-        Group: A set with a binary operation that is closed, associative, contains identity, and all element inverses.
+        Group: The group "Z modulo n" under modular addition.
     """
     set_Z_n = [i for i in range(n)]
     addition_mod_n = lambda a, b : (a + b)%n
