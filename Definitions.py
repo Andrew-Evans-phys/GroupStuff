@@ -248,26 +248,54 @@ def init_Z_(n) -> Group:
     the set {0, 1,..., n-1}, with the operation between any two elements of the set to be addition modulo n.
 
     Args:
-        n (Positive Integer): Arbitrary positive integer that Method is acting on.
+        n (Positive Integer): Arbitrary positive integer that function uses to create the Group Z_n.
 
     Returns:
-        Group: The group "Z modulo n" under modular addition.
+        Group: The group of integers, "Z modulo n," under modular addition.
     """
     set_Z_n = [i for i in range(n)]
     addition_mod_n = lambda a, b : (a + b)%n
     return Group(set_Z_n, addition_mod_n)
 
 def init_U_(n) -> Group:
+    """Function that takes in any positive integer n and returns the "Multiplicative Group of Z modulo n," 
+    That is, the set of numbers from 1 to n-1 that do not share any factors with n (relatively prime), under the operation
+    of modular multiplication.
+
+    Args:
+        n (Positive Integer): Arbitrary positive integer that the Function uses to create the Group U_n.
+
+    Returns:
+        Group: The group of integers under modular multiplicaiton by n, U_n.
+    """
     multiplication_mod_n = lambda a, b : (a * b)%n
     set_U_n = [i for i in range(n) if(gcd(i,n) == 1)]
     return Group(set_U_n, multiplication_mod_n)
 
 def init_S_(n) -> Group:
+    """Function that creates the Group of all permutations for a set with n elements.
+Elements of the set are permutations themselves. 
+    Args:
+        n (Positive Integer): Abritrary positive integer that the Function uses to create the Group S_n.
+
+    Returns:
+        Group: The permutation group S_n, the group of all permutations of a given set with n elements.
+    """
     perm_list = list(itertools.permutations(range(1, n+1)))
     elements = [create_element(perm, n) for perm in perm_list]
     return Group(elements, compose)
 
 def gcd(a, b):
+    """Function of Euclidean Algorithm that determines the Greatest Common Divisor, gcd, of two integers. The gcd is the greatest natural number
+    that divides both integers without leaving a remainder.
+
+    Args:
+        a (Int): Arbitrary integer that function is acting on.
+        b (Int): Arbitrary integer that function is acting on.
+
+    Returns:
+        Positive Int: Returns the greatest common divisor of two integers.
+    """
     if(b == 0):
         return abs(a)
     else:
