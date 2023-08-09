@@ -56,21 +56,52 @@ class Group:
         self.cayley_data = cayley_table
 
     def _operation(self, a, b): #type should be looked into, varible function return?
+        """Method of the class Group that takes in two inputs and performs the group operation (in order of inputs).
+        Checks to make sure data type of inputs are the same as elements in Group before execution.
+
+
+        Args:
+            a (Group Element): Arbitrary element of Group.
+            b (Group Element): Arbitrary element of Group.
+
+        Raises:
+            NotAnElement: Raised when a or b is not an element of the Group.  
+            
+        Returns:
+            Group Element: Value of (a * b).
+        """
         set_form = self._set_to_set()
         if(a not in set_form or b not in set_form):
             raise NotAnElement
         return self._operation_var(a, b)
 
     def _set_to_set(self):
+        """Method of the class Group that takes a list of Group elements and converts into a set of Group elements.
+
+        Returns:
+            set: A set containing the elements of the group.
+        """
         return set(self._set)
 
     def inverse(self, a):
+        """Method of the class Group that validates a single input as an element of the group before finding
+        its corresponding inverse.
+
+        Args:
+            a (Group Elememt): Arbitrary element of the Group.
+
+        Raises:
+            NotAnElement: Raised when a is not an element of the Group.
+
+        Returns:
+            Group Element: Inverse element of a, a^(-1), defined by: a * a^(-1) = a^(-1) * a = e
+        """
         if(a not in self._set_to_set()):
             raise NotAnElement
         return self.inverses_dict.get(a)
 
     def e_order(self, a) -> int:
-        """Method of the class "Group" that returns the order of an element.
+        """Method of the class Group that returns the order of an element.
 
         Args:
             a (Group Element): Element of the group the method is acting on.
@@ -86,6 +117,14 @@ class Group:
         return n
 
     def power(self, a, pow):
+        """Method of the class Group that results in multiplying a by itself n times, a * a * ... * a = a^n.
+        Args:
+            a (Group Element): Element of the group that method is acting on.
+            pow (int): Exponent. Number of times a will be multiplyed by itself.
+
+        Returns:
+            Group Element: Group element mapped to after taking a^n.
+        """
         if(pow == 0):
             return self.identity
         elif(pow == 1):
@@ -93,10 +132,21 @@ class Group:
         else:
             return self._operation(a, self.power(a, pow-1))
 
-    def powers_of_(self, a):
+    def powers_of_(self, a): #To include the interger value of the order n, shouldnt range have a +1 to the self.e_order(a)?
+        """Method of the class Group that returns a list of powers from a^0 to a^n, providing elements of smallest subgroup of element a.
+
+        Args:
+            a (Group Element): Element of the Group that method is acting on.
+
+        Returns:
+            list (Group Element):  A list of Group elements whose placement correspond to taking powers of Group element a.
+        """
         return [self.power(a, i) for i in range(self.e_order(a))]
 
     def display_cayley_table(self) -> None:
+        """Method of the class Group that displays the Cayley Table of the Group in Python terminal; a table whose interior elements 
+        correspond to taking operation between two Group elements as follows:  (row Group element) * (column Group element).
+        """
         output = "|x |"
         for i in self._set:
             output += f"{i}|"
@@ -109,6 +159,10 @@ class Group:
         print(output)
 
     def latex_cayley_table(self) -> None:
+        """Method of the class Group that displays LaTeX code for the Cayley Table of the Group; a table whose 
+        interior elements correspond to taking operation between two Group elements as follows:  
+        (row Group element) * (column Group element).
+        """
         centers = ""
         for i in range(self.order):
             centers += " c"
@@ -190,21 +244,58 @@ def init_D_(n) -> Group:
     return Group(elements, D_n_compose)
 
 def init_Z_(n) -> Group:
+    """Function that takes in any positive integer n and returns the Group "Z modulo n." That is, 
+    the set {0, 1,..., n-1}, with the operation between any two elements of the set to be addition modulo n.
+
+    Args:
+        n (Positive Integer): Arbitrary positive integer that function uses to create the Group Z_n.
+
+    Returns:
+        Group: The group of integers, "Z modulo n," under modular addition.
+    """
     set_Z_n = [i for i in range(n)]
     addition_mod_n = lambda a, b : (a + b)%n
     return Group(set_Z_n, addition_mod_n)
 
 def init_U_(n) -> Group:
+    """Function that takes in any positive integer n and returns the "Multiplicative Group of Z modulo n," 
+    That is, the set of numbers from 1 to n-1 that do not share any factors with n (relatively prime), under the operation
+    of modular multiplication.
+
+    Args:
+        n (Positive Integer): Arbitrary positive integer that the Function uses to create the Group U_n.
+
+    Returns:
+        Group: The group of integers under modular multiplicaiton by n, U_n.
+    """
     multiplication_mod_n = lambda a, b : (a * b)%n
     set_U_n = [i for i in range(n) if(gcd(i,n) == 1)]
     return Group(set_U_n, multiplication_mod_n)
 
 def init_S_(n) -> Group:
+    """Function that creates the Group of all permutations for a set with n elements.
+Elements of the set are permutations themselves. 
+    Args:
+        n (Positive Integer): Abritrary positive integer that the Function uses to create the Group S_n.
+
+    Returns:
+        Group: The permutation group S_n, the group of all permutations of a given set with n elements.
+    """
     perm_list = list(itertools.permutations(range(1, n+1)))
     elements = [create_element(perm, n) for perm in perm_list]
     return Group(elements, compose)
 
 def gcd(a, b):
+    """Function of Euclidean Algorithm that determines the Greatest Common Divisor, gcd, of two integers. The gcd is the greatest natural number
+    that divides both integers without leaving a remainder.
+
+    Args:
+        a (Int): Arbitrary integer that function is acting on.
+        b (Int): Arbitrary integer that function is acting on.
+
+    Returns:
+        Positive Int: Returns the greatest common divisor of two integers.
+    """
     if(b == 0):
         return abs(a)
     else:
